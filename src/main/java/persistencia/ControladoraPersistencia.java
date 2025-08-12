@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import logica.Odontologo;
 import logica.Paciente;
+import logica.Persona;
 import logica.Secretario;
 import logica.TipoDocumento;
 import logica.TipoSangre;
@@ -23,6 +24,7 @@ public class ControladoraPersistencia {
     UsuarioJpaController usuarioJpa/* = new UsuarioJpaController()*/;
     TipoSangreJpaController tipoSanJpa;
     TipoDocumentoJpaController tipoDocJpa;
+    PersonaJpaController personaJpa;
 
     public ControladoraPersistencia() {
         
@@ -35,6 +37,7 @@ public class ControladoraPersistencia {
         horaJpa = new HorarioTrabajoJpaController();
         tipoSanJpa = new TipoSangreJpaController();
         tipoDocJpa = new TipoDocumentoJpaController();
+        personaJpa = new PersonaJpaController();
     }
 
     
@@ -282,6 +285,25 @@ public class ControladoraPersistencia {
     public Secretario traerSecretario(int idSecretario) {
         
         return secreJpa.findSecretario(idSecretario);
+    }
+
+    //===================== Persona ========================================== 
+    public Persona traerPersona(int id) {
+        
+        return personaJpa.findPersona(id);
+    }
+
+    public void editarPersona(Persona personaOriginal) {
+        
+        try {
+            
+            personaJpa.edit(personaOriginal);
+            
+        } catch (Exception ex) {
+            
+            Logger.getLogger(ControladoraPersistencia.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
     }
 
     

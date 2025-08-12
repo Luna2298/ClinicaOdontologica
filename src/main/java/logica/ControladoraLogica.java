@@ -108,7 +108,23 @@ public class ControladoraLogica {
         return controlPersis.traerOdonto(id);
     }
 
-    public void editarOdonto(Odontologo odo) {
+    public void editarOdonto(Odontologo odo, String nombre, String apellido, 
+            String dni, String telefono, String direccion, 
+            Date fechaFormateada, TipoDocumento tipoDoc, TipoSangre tipo_Sangre, 
+            Usuario usuario, String especialidad) {
+        
+        odo.setNombre(nombre);
+        odo.setApellido(apellido);
+        odo.setDni(dni);
+        odo.setTelefono(telefono);
+        odo.setDireccion(direccion);
+        
+        odo.setFecha_nac(fechaFormateada);
+        odo.setEspecialidad(especialidad);
+        
+        odo.setTipoSangre(tipo_Sangre);
+        odo.setTipoDocumento(tipoDoc);
+        odo.setUsuario(usuario);
         
         controlPersis.editarOdonto(odo);
     }
@@ -271,9 +287,29 @@ public class ControladoraLogica {
     }
     
     
-    public void editarSecretario(Secretario secretarioOriginal) {
+    /*public void editarSecretario(Secretario secretarioOriginal) {
         
         controlPersis.editarSecretario(secretarioOriginal);
+    }*/
+    
+    public void editarSecretario(Secretario se, String nombre, String apellido, 
+            String dni, String telefono, String direccion, Date fechaFormateada,
+            TipoDocumento tipoDoc, TipoSangre tipo_Sangre, Usuario usuario, 
+            String sector) {
+        
+        se.setNombre(nombre);
+        se.setApellido(apellido);
+        se.setDni(dni);
+        se.setTelefono(telefono);
+        se.setDireccion(direccion);
+        se.setTipoSangre(tipo_Sangre);
+        se.setTipoDocumento(tipoDoc);
+        se.setSector(sector);
+        se.setUsuario(usuario);
+        se.setFecha_nac(fechaFormateada);
+        
+        controlPersis.editarSecretario(se);
+        
     }
     
     public void borrarSecretario(int idSecretario) {
@@ -290,6 +326,22 @@ public class ControladoraLogica {
         
         return controlPersis.traerSecretario(idSecretario);
     }
+
+    public Persona traerPersona(int id) {
+        
+        return controlPersis.traerPersona(id);
+    }
+    
+    //==================== Persona =============================================
+
+    public void editarPersona(Persona personaOriginal) {
+        
+        controlPersis.editarPersona(personaOriginal);
+    }
+
+    
+
+    
 
     
 

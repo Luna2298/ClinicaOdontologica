@@ -189,7 +189,7 @@ public class SvSecretario extends HttpServlet {
             
             try {
                 // Paso 4: Guardar cambios
-                controlLogica.editarSecretario(secretarioOriginal);
+                //controlLogica.editarSecretario(secretarioOriginal);
 
                 //Envia un Ok al editarUsuario.jsp
                 response.setStatus(HttpServletResponse.SC_OK);

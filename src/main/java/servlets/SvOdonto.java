@@ -188,7 +188,7 @@ public class SvOdonto extends HttpServlet {
 
             try{
                 // Paso 4: Guardar cambios
-                controlLogica.editarOdonto(odontoOriginal);
+                //controlLogica.editarOdonto(odontoOriginal);
                 
                 //Envia un Ok al editarUsuario.jsp
                 response.setStatus(HttpServletResponse.SC_OK);
