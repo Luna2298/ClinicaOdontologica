@@ -93,7 +93,7 @@
                                                         <div style="flex: 1;">
                                                     <form action="SvEmpleado" method="GET">
                                                         <input type="hidden" name="id" value="<%=odo.getId() %>">
-                                                        <button type="submit" name="accion" value="infoOdonto"
+                                                        <button type="submit" name="accion" value="infoPersona"
                                                                 class="btn btn-info btn-sm btn-block">
                                                             <!--<i class="fa-solid fa-info"></i>-->
                                                             <i class="fa-solid fa-circle-info"></i>Info
@@ -122,8 +122,11 @@
     onclick="eliminarOdonto(//odo.getId() )"
     Ya que de lo contrario, la funcion no tomara el valor del id del registro*/
 function eliminarOdonto(idOdo) {
-    if (confirm("¿Estás seguro de que querés eliminar este odontólogo?")) {
-        fetch("SvOdonto?idOdonto=" + idOdo, {
+    
+    const tipo = "odontologo";
+    
+    if (confirm("¿Estás seguro de que querés eliminar este Odontólogo?")) {
+        fetch("SvEmpleado?id=" + idOdo + "&tipo=" + tipo, {
             method: "DELETE"
         })
         .then(res => {
@@ -140,7 +143,7 @@ function eliminarOdonto(idOdo) {
                 //Redireccionamos al Servlet, por default ejecuta el .doGet(), 
                 //haciendo que este actualice la Lista de Usuario, 
                 //y termina redireccionando a mostrar la Lista.
-                    window.location.href = "SvOdonto?accion=listarOdonto"; 
+                    window.location.href = "SvEmpleado?accion=listarOdonto"; 
                 });
             }else {
                 Swal.fire({

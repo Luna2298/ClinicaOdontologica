@@ -61,7 +61,7 @@ public class SvEmpleado extends HttpServlet {
         } else if ("buscarSecre".equals(accion)) {
 
             String tipoAccion = "editarSecre";
-            buscarSecretarioPorId(request, response, tipoAccion);
+            buscarPersonaPorId(request, response, tipoAccion);
 
             //Redirijo a la pestaña editarOdonto.jsp VIEJO
             //request.getRequestDispatcher("editarSecretario.jsp").forward(request, response);
@@ -72,28 +72,20 @@ public class SvEmpleado extends HttpServlet {
         } else if ("buscarOdonto".equals(accion)) {
 
             String tipoAccion = "editarOdo";
-            buscarOdontoPorId(request, response, tipoAccion);
+            buscarPersonaPorId(request, response, tipoAccion);
 
             //Redirijo a la pestaña editarOdonto.jsp VIEJO
             //request.getRequestDispatcher("editarOdonto.jsp").forward(request, response);
             //Redirijo a la pestaña editarEmpleado.jsp
             request.getRequestDispatcher("editarEmpleado.jsp").forward(request, response);
 
-        } else if ("infoSecre".equals(accion)) {
+        } else if ("infoPersona".equals(accion)) {
 
-            String tipoAccion = "infoSecre";
-            buscarSecretarioPorId(request, response, tipoAccion);
-
-            /*Redirecciono a la pestaña de Informacion extra del Secretario*/
-            request.getRequestDispatcher("infoSecretario.jsp").forward(request, response);
-
-        } else if ("infoOdonto".equals(accion)) {
-
-            String tipoAccion = "infoOdo";
-            buscarOdontoPorId(request, response, tipoAccion);
+            String tipoAccion = "infoPersona";
+            buscarPersonaPorId(request, response, tipoAccion);
 
             /*Redirecciono a la pestaña de Informacion extra del Odontologo*/
-            request.getRequestDispatcher("infoOdonto.jsp").forward(request, response);
+            request.getRequestDispatcher("infoPersona.jsp").forward(request, response);
 
             /*Con esto BUSCO la Lista de Tipos de Sangre y de Documentos, 
           los necesito para poder enviarlos al nuevoPaciente.jsp y asi Crear un
@@ -107,53 +99,6 @@ public class SvEmpleado extends HttpServlet {
             /*Redirecciono a la pestaña de Crear un Nuevo Paciente*/
             request.getRequestDispatcher("nuevoEmpleado.jsp").forward(request, response);
         }
-    }
-
-    private void buscarOdontoPorId(HttpServletRequest request, HttpServletResponse response, String tipoAccion)
-            throws ServletException, IOException {
-
-        request.removeAttribute("empleado");
-        request.removeAttribute("Secretario");
-        request.removeAttribute("tipoEmpleado");
-
-        //Obtengo el ID de Odontologo seleccionado en la Lista de Odontologos
-        int id = Integer.parseInt(request.getParameter("id"));
-
-        //Busco el Odontologo en la BD
-        Odontologo odo = controlLogica.traerOdonto(id);
-
-        //Solo es una prueba para ver si llega bien el Odonto
-        System.out.println("El Odontólogo es: " + odo.getApellido());
-
-        String tipoEmpleado = "Odontologo";
-
-        /*Si es 'infoOdo' o sea solo busco mostrar los datos del Odontologo
-        en infoOdonto.jsp*/
-        if (tipoAccion.equals("infoOdo")) {
-
-            request.setAttribute("odo", odo);
-
-            /*Si es DISTINTO de 'infoOdo' es porque busco al Odontologo solo 
-        para EDITARLO en editarEmpleado.jsp*/
-        } else {
-
-            /*Traigo la Lista de TipoSangre, TipoDocumento y Usuarios, que necesito
-        para poder Editar un Odontologo. De lo contrario, sin estos accesorios,
-        al querer cargar el editarEmpleado.jsp no lo hara, ya que falta informacion.*/
-            traerAccesorios(request, response);
-
-            /*Asigno el Odontólogo a la request, para que esta
-        lo lleve al editarEmpleado.jsp y ahi lo pueda usar*/
-            request.setAttribute("empleado", odo);
-            request.setAttribute("odontologo", odo);
-            request.setAttribute("tipoEmpleado", tipoEmpleado);
-
-            /*
-        .setAttribute("tipoEmpleado", "odontologo")
-               nombre de la variable,  valor que contiene la variable
-             */
-        }
-
     }
 
     private void listarSecretarios(HttpServletRequest request, HttpServletResponse response)
@@ -175,44 +120,6 @@ public class SvEmpleado extends HttpServlet {
         /*ChatGPT me lo dijo, Ya que Quiero hacer el proyecto con menos Servlets*/
         request.setAttribute("listaOdonto", listaOdonto);
         request.getRequestDispatcher("listaOdontologos.jsp").forward(request, response);
-
-    }
-
-    private void buscarSecretarioPorId(HttpServletRequest request, HttpServletResponse response,
-            String tipoAccion)
-            throws ServletException, IOException {
-
-        request.removeAttribute("empleado");
-        request.removeAttribute("odontologo");
-        request.removeAttribute("tipoEmpleado");
-
-        //Obtengo el ID de Secretario seleccionado en la Lista de Secretarios
-        int idSecretario = Integer.parseInt(request.getParameter("id"));
-
-        //Busco el Secretario en la BD
-        Secretario se = controlLogica.traerSecretario(idSecretario);
-
-        //Solo es una prueba para ver si llega bien el Secretario
-        System.out.println("El secretario es: " + se.getApellido());
-
-        String tipoEmpleado = "Secretario";
-
-        if (tipoAccion.equals("infoSecre")) {
-
-            request.setAttribute("secretario", se);
-
-        } else {
-            /*Traigo la Lista de TipoSangre, TipoDocumento y Usuarios, que necesito
-        para poder Editar un Secretario. De lo contrario, sin estos accesorios,
-        al querer cargar el editarEmpleado.jsp no lo hara, ya que falta informacion.*/
-            traerAccesorios(request, response);
-
-            /*Asigno el Secretario a la request, para que esta
-        lo lleve al editarEmpleado.jsp y ahi lo pueda usar*/
-            request.setAttribute("empleado", se);
-            request.setAttribute("Secretario", se);
-            request.setAttribute("tipoEmpleado", tipoEmpleado);
-        }
 
     }
 
@@ -561,6 +468,53 @@ public class SvEmpleado extends HttpServlet {
     }
 
     @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        try {
+            /*
+            El parametro 'id' llega del fetch("SvEmpleado?id=" + idOdo, */
+            int id = Integer.parseInt(request.getParameter("id"));
+
+            String tipo = String.valueOf(request.getParameter("tipo"));
+
+            if (tipo.equalsIgnoreCase("odontologo")) {
+
+                Odontologo odo = controlLogica.traerOdonto(id);
+
+                if (odo != null) {
+
+                    controlLogica.borrarOdonto(id);
+                    response.setStatus(HttpServletResponse.SC_OK);
+                } else {
+
+                    response.sendError(HttpServletResponse.SC_NOT_FOUND, "Odontólogo no encontrado");
+                }
+
+            } else if (tipo.equalsIgnoreCase("secretario")) {
+
+                Secretario se = controlLogica.traerSecretario(id);
+
+                if (se != null) {
+
+                    controlLogica.borrarSecretario(id);
+                    response.setStatus(HttpServletResponse.SC_OK);
+                } else {
+
+                    response.sendError(HttpServletResponse.SC_NOT_FOUND, "Secretario no encontrado");
+                }
+            }
+
+        } catch (NumberFormatException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID inválido");
+
+        } catch (Exception e) {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+                    "Error al eliminar el empleado");
+        }
+    }
+
+    @Override
     public String getServletInfo() {
         return "Short description";
     }
@@ -733,6 +687,59 @@ public class SvEmpleado extends HttpServlet {
         }
 
         return errores;
+    }
+
+    private void buscarPersonaPorId(HttpServletRequest request,
+            HttpServletResponse response, String tipoAccion)
+            throws ServletException, IOException {
+
+        request.removeAttribute("empleado");
+        request.removeAttribute("Secretario");
+        request.removeAttribute("Odontologo");
+        request.removeAttribute("tipoEmpleado");
+
+        //Obtengo el ID de Odontologo seleccionado en la Lista de Odontologos
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        String tipoEmpleado = "";
+
+        //Busco el Odontologo en la BD
+        Odontologo odo = controlLogica.traerOdonto(id);
+
+        if (odo != null) {
+
+            //Solo es una prueba para ver si llega bien el Odonto
+            System.out.println("El Odontólogo es: " + odo.getApellido());
+
+            tipoEmpleado = "Odontologo";
+
+            request.setAttribute("empleado", odo);
+            request.setAttribute("Odontologo", odo);
+            request.setAttribute("tipoEmpleado", tipoEmpleado);
+
+        } else {
+
+            //Busco el Secretario en la BD
+            Secretario se = controlLogica.traerSecretario(id);
+
+            //Solo es una prueba para ver si llega bien el Odonto
+            System.out.println("El Secretario es: " + se.getApellido());
+
+            tipoEmpleado = "Secretario";
+
+            request.setAttribute("empleado", se);
+            request.setAttribute("Secretario", se);
+            request.setAttribute("tipoEmpleado", tipoEmpleado);
+        }
+
+        /*Si es 'infoOdo' o sea solo busco mostrar los datos del Odontologo
+        en infoOdonto.jsp*/
+        if (!tipoAccion.equals("infoPersona")) {
+
+            traerAccesorios(request, response);
+
+        }
+
     }
 
 }
