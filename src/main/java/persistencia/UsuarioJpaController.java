@@ -9,6 +9,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import logica.Rol;
 import logica.Usuario;
 import persistencia.exceptions.NonexistentEntityException;
 
@@ -19,12 +20,12 @@ public class UsuarioJpaController implements Serializable {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
-
+    
     public UsuarioJpaController() {
     
         emf = Persistence.createEntityManagerFactory("ConsultorioOdontologico_PU");
     }
-    
+
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
@@ -34,7 +35,16 @@ public class UsuarioJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Rol tipoRol = usuario.getTipoRol();
+            if (tipoRol != null) {
+                tipoRol = em.getReference(tipoRol.getClass(), tipoRol.getIdRol());
+                usuario.setTipoRol(tipoRol);
+            }
             em.persist(usuario);
+            if (tipoRol != null) {
+                tipoRol.getListaUsuarios().add(usuario);
+                tipoRol = em.merge(tipoRol);
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -48,7 +58,22 @@ public class UsuarioJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Usuario persistentUsuario = em.find(Usuario.class, usuario.getIdUsuario());
+            Rol tipoRolOld = persistentUsuario.getTipoRol();
+            Rol tipoRolNew = usuario.getTipoRol();
+            if (tipoRolNew != null) {
+                tipoRolNew = em.getReference(tipoRolNew.getClass(), tipoRolNew.getIdRol());
+                usuario.setTipoRol(tipoRolNew);
+            }
             usuario = em.merge(usuario);
+            if (tipoRolOld != null && !tipoRolOld.equals(tipoRolNew)) {
+                tipoRolOld.getListaUsuarios().remove(usuario);
+                tipoRolOld = em.merge(tipoRolOld);
+            }
+            if (tipoRolNew != null && !tipoRolNew.equals(tipoRolOld)) {
+                tipoRolNew.getListaUsuarios().add(usuario);
+                tipoRolNew = em.merge(tipoRolNew);
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -77,6 +102,11 @@ public class UsuarioJpaController implements Serializable {
                 usuario.getIdUsuario();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.", enfe);
+            }
+            Rol tipoRol = usuario.getTipoRol();
+            if (tipoRol != null) {
+                tipoRol.getListaUsuarios().remove(usuario);
+                tipoRol = em.merge(tipoRol);
             }
             em.remove(usuario);
             em.getTransaction().commit();

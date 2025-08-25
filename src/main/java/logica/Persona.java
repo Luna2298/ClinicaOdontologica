@@ -36,13 +36,18 @@ public class Persona implements Serializable {
     @ManyToOne
     @JoinColumn(name="idTipoDocumento")
     private TipoDocumento tipoDocumento;
+    
+    @ManyToOne
+    @JoinColumn(name="idObraSocial")
+    private ObraSocial obraSocial;
 
     public Persona() {
     }
 
     public Persona(int id, String nombre, String apellido, String dni, 
             String telefono, String direccion, Date fecha_nac, 
-            TipoSangre tipoSangre, TipoDocumento tipoDocumento) {
+            TipoSangre tipoSangre, TipoDocumento tipoDocumento, 
+            ObraSocial obraSocial) {
         
         this.id = id;
         this.nombre = nombre;
@@ -53,6 +58,7 @@ public class Persona implements Serializable {
         this.fecha_nac = fecha_nac;
         this.tipoSangre = tipoSangre;
         this.tipoDocumento = tipoDocumento;
+        this.obraSocial = obraSocial;
     }
 
     public int getId() {
@@ -125,6 +131,14 @@ public class Persona implements Serializable {
 
     public void setTipoDocumento(TipoDocumento tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
+    }
+
+    public ObraSocial getObraSocial() {
+        return obraSocial;
+    }
+
+    public void setObraSocial(ObraSocial obraSocial) {
+        this.obraSocial = obraSocial;
     }
 
     

@@ -238,6 +238,11 @@ public class SvEmpleado extends HttpServlet {
         //==========  Traigo los datos de cada input y combo:  ================
         //Campos comunes entre Odontologo y Secretario:
         String tipoEmpleado = request.getParameter("tipoEmpleado");
+        
+        //Prueba
+        System.out.println("Prueba llega al Servlet: " + tipoEmpleado);
+        
+        
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
         String dni = request.getParameter("dni");
@@ -258,7 +263,7 @@ public class SvEmpleado extends HttpServlet {
 
         try {
 
-            if (tipoEmpleado.equals("Odontólogo")) {
+            if (tipoEmpleado.equalsIgnoreCase("Odontologo")) {
 
                 //Campo especifico de Odontologo:
                 String especialidad = request.getParameter("especialidad");
@@ -268,8 +273,10 @@ public class SvEmpleado extends HttpServlet {
 
                 controlLogica.crearOdonto(nombre, apellido, dni, telefono, direccion,
                         fechaNac, especialidad, tipoSangre, tipoDoc, usuario);
+                
+                response.sendRedirect("SvEmpleado?accion=traerAccesorios");
 
-            } else if (tipoEmpleado.equals("Secretario")) {
+            } else if (tipoEmpleado.equalsIgnoreCase("Secretario")) {
 
                 //Campo especifico de Secretario:
                 String sector = request.getParameter("sector");
@@ -279,6 +286,8 @@ public class SvEmpleado extends HttpServlet {
 
                 controlLogica.crearSecretario(nombre, apellido, dni, telefono, direccion,
                         fechaNac, tipoSangre, tipoDoc, sector, usuario);
+                
+                response.sendRedirect("SvEmpleado?accion=traerAccesorios");
             }
 
         } catch (Exception e) {
@@ -289,7 +298,7 @@ public class SvEmpleado extends HttpServlet {
             request.getRequestDispatcher("nuevoEmpleado.jsp").forward(request, response);
         }
 
-        response.sendRedirect("SvEmpleado?accion=traerAccesorios");
+        
     }
 
     //Aca Edito un Empleado
@@ -338,6 +347,12 @@ public class SvEmpleado extends HttpServlet {
             como desde el JSON:
          */
         // 1. Obtener id desde la URL:
+        /*El ID lo Obtengo de la URL:
+        "SvEmpleado?id=" + datos.id,  de la parte ' ?id= ' NO del 'datos.id'
+        Ya que sin importar de donde se le pase el parametro, o sea datos.id,
+        el dato siempre se identificara como id, gracias a --> ?id= 
+        Es por ello, que llamo al parametro "id":
+        ' request.getParameter("id") '*/
         String idStr = request.getParameter("id");
 
         //Prueba para ver si llega el ID desde la URL al Servlet: 

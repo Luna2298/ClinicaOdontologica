@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import logica.Odontologo;
 import logica.Paciente;
 import logica.Persona;
+import logica.Rol;
 import logica.Secretario;
 import logica.TipoDocumento;
 import logica.TipoSangre;
@@ -25,6 +26,7 @@ public class ControladoraPersistencia {
     TipoSangreJpaController tipoSanJpa;
     TipoDocumentoJpaController tipoDocJpa;
     PersonaJpaController personaJpa;
+    RolJpaController rolJpa;
 
     public ControladoraPersistencia() {
         
@@ -38,6 +40,7 @@ public class ControladoraPersistencia {
         tipoSanJpa = new TipoSangreJpaController();
         tipoDocJpa = new TipoDocumentoJpaController();
         personaJpa = new PersonaJpaController();
+        rolJpa = new RolJpaController();
     }
 
     
@@ -304,6 +307,16 @@ public class ControladoraPersistencia {
             Logger.getLogger(ControladoraPersistencia.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
+    }
+
+    public Rol traerRol(int idRol) {
+        
+        return rolJpa.findRol(idRol);
+    }
+
+    public List<Rol> traerListaRoles() {
+        
+        return rolJpa.findRolEntities();
     }
 
     

@@ -37,10 +37,10 @@ en este mismo .jsp, al lado del input o combo correspondiente.
                     onchange="mostrarCamposTipoEmpleado()" >
                 <option value="" disabled selected>Seleccione</option>
                 <option value="odontologo" 
-                        <%= "odontologo".equals(request.getParameter("tipoEmpleado")) ? "selected" : ""%>>
-                    Odontólogo</option>
+                        <%= "odontologo".equalsIgnoreCase(request.getParameter("tipoEmpleado")) ? "selected" : ""%>>
+                    Odontologo</option>
                 <option value="secretario" 
-                        <%= "secretario".equals(request.getParameter("tipoEmpleado")) ? "selected" : ""%>>
+                        <%= "secretario".equalsIgnoreCase(request.getParameter("tipoEmpleado")) ? "selected" : ""%>>
                     Secretario</option>
             </select>
             <!--Para mostrar la ADVETENCIA/ERROR que viene del script del JS-->
@@ -236,7 +236,7 @@ en este mismo .jsp, al lado del input o combo correspondiente.
                 <% for (Usuario usu : listaUsuarios) {%>
                 <option value="<%= usu.getIdUsuario()%>"
                         <%= String.valueOf(usu.getIdUsuario()).equals(request.getParameter("usuario")) ? "selected" : ""%>>
-                    <%= usu.getNombreUsuario()%>, <%= usu.getRol()%>
+                    <%= usu.getNombreUsuario()%>, <%= usu.getTipoRol().getRol() %>
                 </option>
                 <% }%>
             </select>

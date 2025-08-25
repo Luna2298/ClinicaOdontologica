@@ -21,11 +21,11 @@
         Odontologo odonto = null;
         Secretario secre = null;
 
-        if ("Odontologo".equals(tipoEmpleado)) {
+        if ("Odontologo".equalsIgnoreCase(tipoEmpleado)) {
 
             odonto = (Odontologo) request.getAttribute("empleado");
 
-        } else if ("Secretario".equals(tipoEmpleado)) {
+        } else if ("Secretario".equalsIgnoreCase(tipoEmpleado)) {
 
             secre = (Secretario) request.getAttribute("empleado");
         }

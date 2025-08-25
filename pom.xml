@@ -15,6 +15,12 @@
     </properties>
     
     <dependencies>
+        <!--Dependencia para BCrypt me ayuda a Encriptar Contrasenias-->
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version>
+        </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.core</artifactId>

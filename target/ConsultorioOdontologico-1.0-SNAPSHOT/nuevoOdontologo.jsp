@@ -65,7 +65,7 @@
             <label>Fecha de Nacimiento:</label>
             <input type="date" id="fechaNacimiento" name="fechaNacimiento" 
                    class="form-control form-control-user" 
-                   value="2000-01-01">
+                   value="">
         </div>
         <div class="col-sm-3">
             <% List<TipoSangre> listaTiposSangre

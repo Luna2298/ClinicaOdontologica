@@ -12,7 +12,7 @@ public class Paciente extends Persona implements Serializable{
     
     /*private int idPaciente;*/
     private boolean tieneObraSocial;
-    //private String tipoSangre;
+
     @OneToOne
     private Responsable responsable;
     
@@ -23,17 +23,20 @@ public class Paciente extends Persona implements Serializable{
     }
 
     public Paciente(boolean tieneObraSocial, Responsable responsable, 
-            List<Turno> listaTurnos, int id, String nombre, String apellido, 
-            String dni, String telefono, String direccion, Date fecha_nac, 
-            TipoSangre tipoSangre, TipoDocumento tipoDocumento) {
+            List<Turno> listaTurnos, int id, String nombre, 
+            String apellido, String dni, String telefono, String direccion, 
+            Date fecha_nac, TipoSangre tipoSangre, 
+            TipoDocumento tipoDocumento, ObraSocial obraSocial) {
         
         super(id, nombre, apellido, dni, telefono, direccion, fecha_nac, 
-              tipoSangre, tipoDocumento);
+                tipoSangre, tipoDocumento, obraSocial);
         
         this.tieneObraSocial = tieneObraSocial;
         this.responsable = responsable;
         this.listaTurnos = listaTurnos;
     }
+
+    
 
     /*public int getIdPaciente() {
         return idPaciente;

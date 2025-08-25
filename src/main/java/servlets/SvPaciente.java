@@ -43,20 +43,16 @@ public class SvPaciente extends HttpServlet {
         /*Con esto BUSCO 1 Paciente para EDITARLO*/
         } else if ("buscar".equals(accion)) {
             
-            buscarPacientePorId(request, response);
-        
-           /*Busco Ambas Listas, para luego enviarlas a nuevoPaciente.jsp,
-            y poder crear al Nuevo Paciente con su correspondiente 
-            TipoSangre y TipoDocumento*/
-            UtilidadesServlet.listaTiposSangre(request, controlLogica);
-            UtilidadesServlet.listaTiposDocumentos(request, controlLogica);
+            String tipoOperacion = "buscar";
+            buscarPacientePorId(request, response, tipoOperacion);
         
             //Redirijo a la pestaña editarOdonto.jsp
             request.getRequestDispatcher("editarPaciente.jsp").forward(request, response);
         
         } else if ("info".equals(accion)) {
             
-            buscarPacientePorId(request, response);
+            String tipoOperacion = "info";
+            buscarPacientePorId(request, response, tipoOperacion);
             
             /*Redirecciono a la pestaña de Informacion extra del Paciente*/
             request.getRequestDispatcher("infoPaciente.jsp").forward(request, response);
@@ -68,13 +64,8 @@ public class SvPaciente extends HttpServlet {
           Lista de estos.*/
         } else if ("traerAccesorios".equals(accion)) {
             
-            /*Busco Ambas Listas, para luego enviarlas a nuevoPaciente.jsp,
-              y poder crear al Nuevo Paciente con su correspondiente 
-              TipoSangre y TipoDocumento*/
-            UtilidadesServlet.listaTiposSangre(request, controlLogica);
-            UtilidadesServlet.listaTiposDocumentos(request, controlLogica);
-            
-            
+            traerAccesorios(request, response);
+
             /*Redirecciono a la pestaña de Crear un Nuevo Paciente*/
             request.getRequestDispatcher("nuevoPaciente.jsp").forward(request, response);
         }
@@ -235,7 +226,8 @@ public class SvPaciente extends HttpServlet {
         request.getRequestDispatcher("listaPacientes.jsp").forward(request, response);
     }
 
-    private void buscarPacientePorId(HttpServletRequest request, HttpServletResponse response)
+    private void buscarPacientePorId(HttpServletRequest request, 
+            HttpServletResponse response, String tipoOperacion)
             throws ServletException, IOException {
         
         int idPaciente = Integer.parseInt(request.getParameter("id"));
@@ -246,7 +238,24 @@ public class SvPaciente extends HttpServlet {
         System.out.println("El paciente es: " + pa.getApellido());
         
         request.setAttribute("paciente", pa);
+        
+        if (tipoOperacion.equalsIgnoreCase("buscar")) {
+            
+            traerAccesorios(request, response);
+        }
+        
+        
 
+    }
+
+    private void traerAccesorios(HttpServletRequest request, HttpServletResponse response) 
+        throws ServletException, IOException {
+        
+        /*Busco Ambas Listas, para luego enviarlas a nuevoPaciente.jsp,
+              y poder crear al Nuevo Paciente con su correspondiente 
+              TipoSangre y TipoDocumento*/
+            UtilidadesServlet.listaTiposSangre(request, controlLogica);
+            UtilidadesServlet.listaTiposDocumentos(request, controlLogica);
     }
 
 

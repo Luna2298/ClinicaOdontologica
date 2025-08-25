@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logica.ControladoraLogica;
+import logica.Rol;
 import logica.TipoDocumento;
 import logica.TipoSangre;
 import logica.Usuario;
@@ -68,5 +69,13 @@ public class UtilidadesServlet extends HttpServlet {
         List<Usuario> listaUsuarios = controlLogica.getListUsers();
         
         request.setAttribute("listaUsuarios", listaUsuarios);
+    }
+    
+    public static void listaRoles(HttpServletRequest request, ControladoraLogica controlLogica) 
+        throws ServletException, IOException {
+        
+        List<Rol> listaRoles = controlLogica.traerListaRoles();
+        
+        request.setAttribute("listaRoles", listaRoles);
     }
 }

@@ -12,6 +12,9 @@
     <class>logica.Usuario</class>
     <class>logica.TipoSangre</class>
     <class>logica.TipoDocumento</class>
+    <class>logica.EstadoLaboral</class>
+    <class>logica.ObraSocial</class>
+    <class>logica.Rol</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/clinica_odonto_v2?serverTimezone=UTC"/>

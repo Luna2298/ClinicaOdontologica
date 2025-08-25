@@ -64,7 +64,7 @@
             <label>Fecha de Nacimiento:</label>
             <input type="date" id="fechaNacimiento" name="fechaNacimiento" 
                    class="form-control form-control-user" 
-                   value="2000-01-01">
+                   value="">
         </div>
         <div class="col-sm-3">
             <% List<TipoSangre> listaTiposSangre
@@ -112,52 +112,5 @@
     document.getElementById("fechaNacimiento").max = hoy;
 </script>
 
-
-
-
-<!--<script>
-    /*
-    Con esto, dependiendo de si el Paciente TIENE o NO obra social, entonces:
-    De ser TRUE, el input siguiente se activara permitiendo poder escribir en el. 
-    De lo contrario, FALSE, el input no se activara y no se podra escribir en el.*/
-    document.getElementById("opcion").addEventListener("change", function () {
-        const campo = document.getElementById("campoExtra");
-        if (this.value === "si") {
-            campo.disabled = false;
-        } else {
-            campo.disabled = true;
-            campo.value = ""; // opcional: limpiar el campo si se desactiva
-        }
-    });
-</script>-->
-
-
-
-
-<!--
-Otra opcion para activar o no un campo, en este caso ObraSocial del Paciente.
-Usando: radioButtons para SI y NO. Y un input donde escribir el tipo de ObraSocial.
-Y el codigo JavaScript correspondiente para activar o no el input, 
-dependiendo la opcion elegida.
-
-HTML:
-<label><input type="radio" name="activar" value="si"> Sí</label>
-<label><input type="radio" name="activar" value="no" checked> No</label>
-<input type="text" id="campoExtra" class="form-control mt-2" placeholder="Campo adicional" disabled>
-
-JAVASCRIPT:
-<script>
-    document.querySelectorAll('input[name="activar"]').forEach(function (radio) {
-        radio.addEventListener("change", function () {
-            const campo = document.getElementById("campoExtra");
-            if (this.value === "si") {
-                campo.disabled = false;
-            } else {
-                campo.disabled = true;
-                campo.value = ""; // opcional
-            }
-        });
-    });
-</script>-->
 
 <%@include file="components/bodyfinal.jsp"%>

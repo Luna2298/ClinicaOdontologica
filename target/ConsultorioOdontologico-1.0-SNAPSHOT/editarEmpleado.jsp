@@ -36,11 +36,11 @@ como el atributo solicitado no existe, request.getAttribute() devuelve NULL. */
     Odontologo odonto = null;
     Secretario secre = null;
 
-    if ("Odontologo".equals(tipoEmpleado)) {
+    if ("Odontologo".equalsIgnoreCase(tipoEmpleado)) {
 
         odonto = (Odontologo) request.getAttribute("empleado");
 
-    } else if ("Secretario".equals(tipoEmpleado)) {
+    } else if ("Secretario".equalsIgnoreCase(tipoEmpleado)) {
 
         secre = (Secretario) request.getAttribute("empleado");
     }
@@ -61,12 +61,12 @@ En caso de que por alguna razon la validacion del JS falle, aun asi el Servlet,
 tendra su propia validacion. Y en caso de encontrar error, se mostrara la advertencia
 en este mismo .jsp, al lado del input o combo correspondiente.
 -->
-<form id="formEditarEmpleado" class="user"> <!--onsubmit="return validarFormulario()"-->
+<form id="formEditarEmpleado" class="user">
 
     <!--Con esto mostrare cada MENSAJE DE ERROR/ADVERTENCIA que viene desde el SERVLET,
     el cual se mostrara al lado de cada input o combo. Solo si NO USO JSON.
-    Pero en este caso, USARE JSON, el cual le llagara al JS, y este se encarga de 
-    mostrar cada error al lado de cada input-->
+    Pero en este caso, USARE JSON, el cual viene desde el Servlet, le llagara al JS, 
+    y este se encarga de mostrar cada error al lado de cada input-->
     <!--Map<String, String> erroresAlEditar = (Map<String, String>) request.getAttribute("erroresAlEditar");-->
 
 
@@ -94,7 +94,9 @@ en este mismo .jsp, al lado del input o combo correspondiente.
                            ? request.getParameter("nombre") : persona.getNombre()%> ">
 
 
-            <!--<span class="error" id="error-nombre"></span>-->
+            <!--Aca se muestra los mensaje de Error/Advertencia que llegan desde
+            el Servlet en formato JSON y van al JS. 
+            El JS se encarga de mostrar los mensajes al lado de cada input.-->
             <div class="error" id="error-nombre"></div>
 
 

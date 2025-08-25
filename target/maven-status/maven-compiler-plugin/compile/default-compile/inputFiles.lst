@@ -12,12 +12,17 @@ C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\servle
 C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\persistencia\exceptions\IllegalOrphanException.java
 C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\logica\Odontologo.java
 C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\persistencia\UsuarioJpaController.java
+C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\persistencia\EstadoLaboralJpaController.java
+C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\logica\ObraSocial.java
 C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\logica\Responsable.java
+C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\persistencia\ObraSocialJpaController.java
 C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\servlets\SvPaciente.java
 C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\persistencia\ControladoraPersistencia.java
+C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\persistencia\RolJpaController.java
 C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\logica\Usuario.java
 C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\servlets\SvTipoSangre.java
 C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\servlets\SvUsuarios.java
+C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\logica\EstadoLaboral.java
 C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\logica\Turno.java
 C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\persistencia\SecretarioJpaController.java
 C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\persistencia\TurnoJpaController.java
@@ -29,5 +34,6 @@ C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\persis
 C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\logica\Persona.java
 C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\logica\ControladoraLogica.java
 C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\logica\HorarioTrabajo.java
+C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\logica\Rol.java
 C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\servlets\UtilidadesServlet.java
 C:\Users\lunal\Desktop\Consultorio Odontologico Version Mia\src\main\java\servlets\SvSecretario.java

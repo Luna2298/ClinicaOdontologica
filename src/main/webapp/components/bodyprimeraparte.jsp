@@ -75,8 +75,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones:</h6>
-                        <a class="collapse-item" href="SvPaciente?accion=listar">Lista Pacientes</a>
                         <a class="collapse-item" href="SvPaciente?accion=traerAccesorios">Nuevo Paciente</a>
+                        <a class="collapse-item" href="SvPaciente?accion=listar">Lista Pacientes</a>
                     </div>
                 </div>
             </li>
@@ -95,7 +95,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones:</h6>
                         <a class="collapse-item" href="SvUsuarios?accion=listar" >Lista Usuarios</a>
-                        <a class="collapse-item" href="nuevoUsuario.jsp">Nuevo Usuario</a>
+                        <a class="collapse-item" href="SvUsuarios?accion=traerAccesorios">Nuevo Usuario</a>
                     </div>
                 </div>
             </li>

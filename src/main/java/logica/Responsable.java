@@ -14,13 +14,16 @@ public class Responsable extends Persona{
 
     public Responsable(String tipoResponsable, int id, String nombre, 
             String apellido, String dni, String telefono, String direccion, 
-            Date fecha_nac, TipoSangre tipoSangre, TipoDocumento tipoDocumento) {
+            Date fecha_nac, TipoSangre tipoSangre, 
+            TipoDocumento tipoDocumento, ObraSocial obraSocial) {
         
         super(id, nombre, apellido, dni, telefono, direccion, fecha_nac, 
-              tipoSangre, tipoDocumento);
+                tipoSangre, tipoDocumento, obraSocial);
         
         this.tipoResponsable = tipoResponsable;
     }
+
+    
 
     /*public int getIdResponsable() {
         return idResponsable;

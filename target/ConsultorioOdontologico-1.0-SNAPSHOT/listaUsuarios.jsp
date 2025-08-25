@@ -52,7 +52,7 @@
                                         <tr>
                                             <td id="id_usu<%=usu.getIdUsuario() %>"><%=usu.getIdUsuario() %></td>
                                             <td><%=usu.getNombreUsuario() %></td>
-                                            <td><%=usu.getRol() %></td>
+                                            <td><%=usu.getTipoRol().getRol() %></td>
                                             <td style="display: flex; gap: 10px;">
                                                 <div style="flex: 1;">
                                                     <button type="button" class="btn btn-danger btn-sm btn-block"
